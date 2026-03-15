@@ -1,0 +1,740 @@
+/* ==========================================================================
+   FOCO — Light Theme for Typora
+   Diseñado para uso diario. Ergonomía visual prioritaria.
+   Fuentes: Segoe UI · JetBrains Mono
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   VARIABLES — Sistema de diseño
+   -------------------------------------------------------------------------- */
+:root {
+  /* Paleta cálida */
+  --bg-primary:       #F5F1EB;   /* Fondo principal — blanco marfil cálido     */
+  --bg-secondary:     #EDE9E2;   /* Fondo alternativo — blockquotes, sidebar   */
+  --bg-code:          #E8E3DA;   /* Fondo código inline                        */
+  --bg-code-block:    #EFEAE1;   /* Fondo bloques de código                    */
+  --bg-table-alt:     #EDE8DF;   /* Filas alternadas en tablas                 */
+  --bg-selection:     #C9DDD4;   /* Selección de texto                         */
+
+  /* Texto */
+  --text-primary:     #27211C;   /* Marrón oscuro — evita el negro puro        */
+  --text-secondary:   #7A736A;   /* Subtítulos, metadatos, captions            */
+  --text-tertiary:    #A89F96;   /* Placeholders, texto desactivado            */
+  --text-inverse:     #F5F1EB;   /* Texto sobre fondo oscuro                   */
+
+  /* Acento único — verde musgo */
+  --accent:           #4D7A65;   /* Acento principal                           */
+  --accent-light:     #6B9E87;   /* Acento hover / links activos               */
+  --accent-muted:     #C4D9CF;   /* Acento muy suave — bordes, decoración      */
+
+  /* Bordes y separadores */
+  --border-strong:    #C8C2B8;   /* Bordes visibles (tablas, hr)               */
+  --border-subtle:    #DDD8D0;   /* Bordes estructurales discretos             */
+
+  /* Tipografía */
+  --font-body:        "Segoe UI", "Segoe UI Historic", sans-serif;
+  --font-mono:        "JetBrains Mono", monospace;
+
+  /* Escala — mayor tercera (×1.25) desde 17px */
+  --text-xs:          13px;
+  --text-sm:          15px;
+  --text-base:        17px;
+  --text-md:          21px;      /* H4                                         */
+  --text-lg:          26px;      /* H3                                         */
+  --text-xl:          33px;      /* H2                                         */
+  --text-2xl:         41px;      /* H1                                         */
+
+  /* Espaciado y ritmo vertical */
+  --line-height:      1.75;
+  --line-height-heading: 1.25;
+  --line-height-code: 1.6;
+  --paragraph-spacing: 1.1em;
+
+  /* Medidas del editor */
+  --max-width:        720px;
+  --padding-v:        80px;
+  --padding-h:        60px;
+
+  /* Miscelánea */
+  --radius:           4px;
+  --radius-lg:        6px;
+  --transition:       150ms ease;
+}
+
+
+/* --------------------------------------------------------------------------
+   RESET Y BASE
+   -------------------------------------------------------------------------- */
+* {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+
+/* --------------------------------------------------------------------------
+   BODY — Contenedor raíz
+   -------------------------------------------------------------------------- */
+body {
+  font-family:      var(--font-body);
+  font-size:        var(--text-base);
+  line-height:      var(--line-height);
+  color:            var(--text-primary);
+  background-color: var(--bg-primary);
+  margin:           0;
+  padding:          0;
+}
+
+
+/* --------------------------------------------------------------------------
+   ÁREA DE ESCRITURA
+   -------------------------------------------------------------------------- */
+#write {
+  max-width:   var(--max-width);
+  margin:      0 auto;
+  padding:     var(--padding-v) var(--padding-h);
+  word-wrap:   break-word;
+  word-break:  normal;
+}
+
+#write > :first-child {
+  margin-top: 0;
+}
+
+
+/* --------------------------------------------------------------------------
+   TIPOGRAFÍA — Párrafos
+   -------------------------------------------------------------------------- */
+p {
+  margin:      0 0 var(--paragraph-spacing) 0;
+  hyphens:     auto;
+  -webkit-hyphens: auto;
+}
+
+
+/* --------------------------------------------------------------------------
+   HEADINGS — Jerarquía por espaciado, no solo por tamaño
+   -------------------------------------------------------------------------- */
+h1, h2, h3, h4, h5, h6 {
+  font-family:    var(--font-body);
+  font-weight:    600;
+  line-height:    var(--line-height-heading);
+  color:          var(--text-primary);
+  margin-top:     2.2em;
+  margin-bottom:  0.5em;
+  letter-spacing: -0.015em;
+}
+
+h1 {
+  font-size:      var(--text-2xl);
+  font-weight:    300;
+  letter-spacing: -0.03em;
+  color:          var(--text-primary);
+  margin-top:     0;
+  margin-bottom:  0.8em;
+  padding-bottom: 0.4em;
+  border-bottom:  2px solid var(--accent-muted);
+}
+
+h2 {
+  font-size:      var(--text-xl);
+  font-weight:    400;
+  margin-top:     2.5em;
+  padding-bottom: 0.25em;
+  border-bottom:  1px solid var(--border-subtle);
+}
+
+h3 {
+  font-size:    var(--text-lg);
+  font-weight:  500;
+}
+
+h4 {
+  font-size:    var(--text-md);
+  font-weight:  600;
+}
+
+h5 {
+  font-size:    var(--text-base);
+  font-weight:  600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color:        var(--text-secondary);
+}
+
+h6 {
+  font-size:  var(--text-sm);
+  font-weight: 600;
+  color:      var(--text-secondary);
+}
+
+/* Anclas de encabezados */
+h1 .md-focus-tail,
+h2 .md-focus-tail,
+h3 .md-focus-tail {
+  display: none;
+}
+
+
+/* --------------------------------------------------------------------------
+   ENLACES
+   -------------------------------------------------------------------------- */
+a,
+a:visited {
+  color:           var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition:      color var(--transition);
+}
+
+a:hover {
+  color:           var(--accent-light);
+  text-decoration-thickness: 2px;
+}
+
+
+/* --------------------------------------------------------------------------
+   ÉNFASIS
+   -------------------------------------------------------------------------- */
+strong {
+  font-weight: 700;
+  color:       var(--text-primary);
+}
+
+em {
+  font-style:  italic;
+  color:       var(--text-primary);
+}
+
+del {
+  color:           var(--text-tertiary);
+  text-decoration: line-through;
+}
+
+mark {
+  background-color: #E0EDBB;
+  color:            var(--text-primary);
+  padding:          0 3px;
+  border-radius:    2px;
+}
+
+
+/* --------------------------------------------------------------------------
+   CÓDIGO — Inline
+   -------------------------------------------------------------------------- */
+code,
+tt {
+  font-family:      var(--font-mono);
+  font-size:        0.875em;
+  font-weight:      400;
+  background-color: var(--bg-code);
+  color:            #3D6B5A;
+  padding:          2px 6px;
+  border-radius:    var(--radius);
+  border:           1px solid var(--border-subtle);
+  font-feature-settings: "liga" 1, "calt" 1;
+}
+
+/* Evitar doble estilo en bloques */
+pre code,
+pre tt {
+  background: none;
+  border:     none;
+  padding:    0;
+  font-size:  inherit;
+  color:      inherit;
+}
+
+
+/* --------------------------------------------------------------------------
+   CÓDIGO — Bloques
+   -------------------------------------------------------------------------- */
+pre {
+  font-family:      var(--font-mono);
+  font-size:        var(--text-sm);
+  line-height:      var(--line-height-code);
+  background-color: var(--bg-code-block);
+  border:           1px solid var(--border-subtle);
+  border-left:      3px solid var(--accent);
+  border-radius:    var(--radius-lg);
+  padding:          20px 24px;
+  overflow-x:       auto;
+  margin:           1.5em 0;
+  font-feature-settings: "liga" 1, "calt" 1;
+}
+
+/* Etiqueta del lenguaje */
+.md-fences-adv-panel {
+  font-family:  var(--font-mono);
+  font-size:    var(--text-xs);
+  color:        var(--text-tertiary);
+}
+
+/* Numeración de líneas */
+.CodeMirror-linenumber {
+  color:      var(--text-tertiary);
+  font-size:  var(--text-xs);
+  min-width:  2.5em;
+}
+
+/* Syntax highlighting — paleta cálida */
+.cm-keyword    { color: #6B4C8A; font-weight: 600; }
+.cm-string     { color: #4A7A52; }
+.cm-number     { color: #2A6E8A; }
+.cm-variable   { color: var(--text-primary); }
+.cm-variable-2 { color: #5C3D7A; }
+.cm-def        { color: #1D6B73; }
+.cm-comment    { color: var(--text-tertiary); font-style: italic; }
+.cm-operator   { color: #7A4A2A; }
+.cm-property   { color: #2A6073; }
+.cm-type       { color: #6B3A3A; }
+.cm-builtin    { color: #4A5E7A; }
+.cm-tag        { color: #7A3A4A; }
+.cm-attribute  { color: #3A5A7A; }
+.cm-atom       { color: #2A6E8A; }
+.cm-meta       { color: var(--text-tertiary); }
+.cm-error      { color: #A03030; background: #FAE8E8; }
+
+
+/* --------------------------------------------------------------------------
+   BLOCKQUOTE
+   -------------------------------------------------------------------------- */
+blockquote {
+  margin:       1.5em 0;
+  padding:      0.75em 1.25em;
+  border-left:  3px solid var(--accent);
+  background:   var(--bg-secondary);
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+  color:        var(--text-secondary);
+  font-style:   normal;
+}
+
+blockquote p {
+  margin: 0;
+}
+
+blockquote p + p {
+  margin-top: 0.7em;
+}
+
+/* Blockquotes anidados */
+blockquote blockquote {
+  border-left-color: var(--accent-muted);
+  background:        transparent;
+  margin:            0.75em 0;
+}
+
+
+/* --------------------------------------------------------------------------
+   LISTAS
+   -------------------------------------------------------------------------- */
+ul, ol {
+  padding-left: 1.75em;
+  margin:       0 0 var(--paragraph-spacing) 0;
+}
+
+li {
+  margin-bottom: 0.3em;
+  line-height:   var(--line-height);
+}
+
+li > p {
+  margin: 0;
+}
+
+/* Bullets personalizados */
+ul {
+  list-style: none;
+}
+
+ul li::before {
+  content:     "–";
+  color:       var(--accent);
+  font-weight: 400;
+  display:     inline-block;
+  width:       1.25em;
+  margin-left: -1.25em;
+}
+
+/* Listas anidadas */
+ul ul li::before {
+  content: "·";
+  color:   var(--text-tertiary);
+}
+
+ul ul ul li::before {
+  content: "○";
+  color:   var(--text-tertiary);
+}
+
+/* Task lists */
+.md-task-list-item > input {
+  appearance:       none;
+  -webkit-appearance: none;
+  width:            14px;
+  height:           14px;
+  border:           1.5px solid var(--border-strong);
+  border-radius:    3px;
+  vertical-align:   middle;
+  margin-right:     6px;
+  margin-left:      -1.5em;
+  cursor:           pointer;
+  background:       var(--bg-primary);
+  transition:       all var(--transition);
+}
+
+.md-task-list-item > input:checked {
+  background:   var(--accent);
+  border-color: var(--accent);
+}
+
+.md-task-list-item > input:checked::after {
+  content:     "✓";
+  color:       white;
+  font-size:   10px;
+  display:     flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 14px;
+}
+
+.md-task-list-item.task-list-done > p {
+  color:           var(--text-tertiary);
+  text-decoration: line-through;
+}
+
+
+/* --------------------------------------------------------------------------
+   SEPARADOR HORIZONTAL
+   -------------------------------------------------------------------------- */
+hr {
+  border:        none;
+  border-top:    1px solid var(--border-subtle);
+  margin:        2.5em auto;
+  width:         60%;
+}
+
+/* Variante con tres puntos */
+hr::after {
+  content:    "· · ·";
+  display:    block;
+  text-align: center;
+  margin-top: -0.75em;
+  background: var(--bg-primary);
+  width:      4em;
+  margin-left: auto;
+  margin-right: auto;
+  color:      var(--text-tertiary);
+  font-size:  var(--text-sm);
+  letter-spacing: 0.3em;
+}
+
+
+/* --------------------------------------------------------------------------
+   TABLAS
+   -------------------------------------------------------------------------- */
+table {
+  width:           100%;
+  border-collapse: collapse;
+  margin:          1.5em 0;
+  font-size:       var(--text-sm);
+  overflow:        hidden;
+  border-radius:   var(--radius-lg);
+  border:          1px solid var(--border-subtle);
+}
+
+thead {
+  background-color: var(--bg-secondary);
+}
+
+th {
+  font-weight:   600;
+  color:         var(--text-secondary);
+  text-transform: uppercase;
+  font-size:     var(--text-xs);
+  letter-spacing: 0.06em;
+  padding:       10px 14px;
+  text-align:    left;
+  border-bottom: 2px solid var(--border-strong);
+}
+
+td {
+  padding:       9px 14px;
+  border-bottom: 1px solid var(--border-subtle);
+  vertical-align: top;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tr:nth-child(even) td {
+  background-color: var(--bg-table-alt);
+}
+
+tr:hover td {
+  background-color: var(--bg-selection);
+  transition:       background var(--transition);
+}
+
+
+/* --------------------------------------------------------------------------
+   IMÁGENES
+   -------------------------------------------------------------------------- */
+img {
+  max-width:    100%;
+  height:       auto;
+  border-radius: var(--radius-lg);
+  display:      block;
+  margin:       1.5em auto;
+}
+
+.md-image > .md-meta {
+  color:      var(--text-tertiary);
+  font-size:  var(--text-xs);
+  display:    block;
+  text-align: center;
+  margin-top: 0.4em;
+}
+
+
+/* --------------------------------------------------------------------------
+   FOOTNOTES
+   -------------------------------------------------------------------------- */
+.md-footnote {
+  font-size:   var(--text-xs);
+  color:       var(--accent);
+  font-weight: 600;
+  vertical-align: super;
+}
+
+.footnotes {
+  font-size:   var(--text-sm);
+  color:       var(--text-secondary);
+  margin-top:  3em;
+  padding-top: 1.5em;
+  border-top:  1px solid var(--border-subtle);
+}
+
+.footnotes ol {
+  padding-left: 1.5em;
+}
+
+.footnotes li {
+  margin-bottom: 0.5em;
+}
+
+
+/* --------------------------------------------------------------------------
+   FRONTMATTER / YAML
+   -------------------------------------------------------------------------- */
+.md-meta-block {
+  font-family:  var(--font-mono);
+  font-size:    var(--text-xs);
+  color:        var(--text-tertiary);
+  background:   var(--bg-code-block);
+  border:       1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding:      14px 18px;
+  margin-bottom: 2em;
+  line-height:  var(--line-height-code);
+}
+
+
+/* --------------------------------------------------------------------------
+   MATH — KaTeX / MathJax
+   -------------------------------------------------------------------------- */
+.md-math-block {
+  background:   var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  padding:      1em;
+  margin:       1.5em 0;
+  text-align:   center;
+}
+
+.md-inline-math {
+  color: var(--accent);
+}
+
+
+/* --------------------------------------------------------------------------
+   DIAGRAMS — Mermaid
+   -------------------------------------------------------------------------- */
+.md-diagram-panel {
+  background:   var(--bg-secondary);
+  border:       1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding:      1.5em;
+  margin:       1.5em 0;
+}
+
+
+/* --------------------------------------------------------------------------
+   TABLA DE CONTENIDOS — TOC
+   -------------------------------------------------------------------------- */
+.md-toc {
+  font-size:   var(--text-sm);
+  color:       var(--text-secondary);
+  background:  var(--bg-secondary);
+  border:      1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding:     1em 1.5em;
+  margin:      1.5em 0;
+}
+
+.md-toc-item a {
+  color:      var(--text-secondary);
+  text-decoration: none;
+}
+
+.md-toc-item a:hover {
+  color: var(--accent);
+}
+
+.md-toc-h1 { font-weight: 600; }
+.md-toc-h2 { padding-left: 1em; }
+.md-toc-h3 { padding-left: 2em; font-size: var(--text-xs); }
+
+
+/* --------------------------------------------------------------------------
+   SELECCIÓN DE TEXTO
+   -------------------------------------------------------------------------- */
+::selection {
+  background-color: var(--bg-selection);
+  color:            var(--text-primary);
+}
+
+::-moz-selection {
+  background-color: var(--bg-selection);
+  color:            var(--text-primary);
+}
+
+
+/* --------------------------------------------------------------------------
+   UI DE TYPORA — Barra lateral
+   -------------------------------------------------------------------------- */
+#typora-sidebar {
+  font-family:      var(--font-body);
+  background-color: var(--bg-secondary) !important;
+  border-right:     1px solid var(--border-subtle) !important;
+  font-size:        var(--text-sm);
+}
+
+.file-list-item {
+  color: var(--text-secondary) !important;
+}
+
+.file-list-item:hover,
+.file-list-item.active {
+  background-color: var(--accent-muted) !important;
+  color:            var(--text-primary) !important;
+}
+
+.sidebar-content-content {
+  background: var(--bg-secondary) !important;
+}
+
+
+/* --------------------------------------------------------------------------
+   UI DE TYPORA — Línea activa (focus mode)
+   -------------------------------------------------------------------------- */
+.on-focus-mode .md-end-block:not(.md-focus):not(.md-focus-container) * {
+  color:            var(--text-tertiary) !important;
+  caret-color:      var(--accent);
+}
+
+.md-focus-container {
+  caret-color: var(--accent);
+}
+
+
+/* --------------------------------------------------------------------------
+   UI DE TYPORA — Typewriter mode (scrolling)
+   -------------------------------------------------------------------------- */
+#write .md-focus .md-line {
+  /* La línea activa no cambia visualmente, solo el cursor */
+}
+
+
+/* --------------------------------------------------------------------------
+   UI DE TYPORA — Barra de estado
+   -------------------------------------------------------------------------- */
+footer.ty-footer {
+  font-family:      var(--font-body);
+  font-size:        var(--text-xs);
+  color:            var(--text-tertiary) !important;
+  background-color: var(--bg-secondary) !important;
+  border-top:       1px solid var(--border-subtle) !important;
+}
+
+
+/* --------------------------------------------------------------------------
+   UI DE TYPORA — Tooltips y menús
+   -------------------------------------------------------------------------- */
+.ty-tooltip {
+  font-family: var(--font-body);
+  font-size:   var(--text-xs);
+  background:  var(--text-primary);
+  color:       var(--text-inverse);
+  border-radius: var(--radius);
+}
+
+
+/* --------------------------------------------------------------------------
+   UI DE TYPORA — Scrollbar
+   -------------------------------------------------------------------------- */
+::-webkit-scrollbar {
+  width:  6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background:    var(--border-strong);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-tertiary);
+}
+
+
+/* --------------------------------------------------------------------------
+   IMPRESIÓN
+   -------------------------------------------------------------------------- */
+@media print {
+  #write {
+    max-width: 100%;
+    padding:   0;
+  }
+
+  body {
+    background: white;
+    color:      black;
+    font-size:  12pt;
+  }
+
+  h1 { font-size: 24pt; }
+  h2 { font-size: 20pt; }
+  h3 { font-size: 16pt; }
+
+  pre, code {
+    font-size: 10pt;
+  }
+
+  a {
+    color:           black;
+    text-decoration: underline;
+  }
+
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #666;
+  }
+}
